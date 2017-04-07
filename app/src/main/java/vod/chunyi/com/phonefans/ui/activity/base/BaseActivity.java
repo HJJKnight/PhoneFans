@@ -28,7 +28,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(getLayoutId());
-
         initVaribles();
         ButterKnife.bind(this);
         initToolBar();

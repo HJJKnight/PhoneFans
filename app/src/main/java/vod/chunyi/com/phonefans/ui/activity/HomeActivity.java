@@ -11,6 +11,7 @@ import butterknife.ButterKnife;
 import vod.chunyi.com.phonefans.R;
 import vod.chunyi.com.phonefans.adapter.ContainerViewAdaper;
 import vod.chunyi.com.phonefans.ui.activity.base.BaseActivity;
+import vod.chunyi.com.phonefans.utils.StatusBarUtils;
 import vod.chunyi.com.phonefans.view.HomeBottomController;
 
 /**
@@ -39,6 +40,8 @@ public class HomeActivity extends BaseActivity {
     @Override
     public void initViews() {
 
+        StatusBarUtils.setColor(this, getResources().getColor(R.color.seek_bar_pj));
+
         mContainer.setAdapter(new ContainerViewAdaper(HomeActivity.this, getSupportFragmentManager(), mTiltes));
         mTabTitle.setupWithViewPager(mContainer);
     }
@@ -52,7 +55,6 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
 

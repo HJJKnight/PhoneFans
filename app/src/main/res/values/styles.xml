@@ -25,4 +25,5 @@
         <item name="tabBackground">?attr/selectableItemBackground</item>
         <item name="tabSelectedTextColor">@color/seek_bar_pj</item>
     </style>
+
 </resources>
