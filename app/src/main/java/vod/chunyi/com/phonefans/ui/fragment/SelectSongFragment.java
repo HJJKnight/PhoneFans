@@ -24,6 +24,11 @@ public class SelectSongFragment extends BaseFragment {
     }
 
     @Override
+    public void initData() {
+
+    }
+
+    @Override
     public void initViews(View view) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getHolderActivity());
 

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">PhoneFans</string>
 
+    <string name="db_name">fans.db</string>
+    <string name="server_url">http://125.62.26.52/fans/</string>
     <string name="check_apk_url">http://125.62.26.52/fans/vod_apk_version.json</string>
     <string name="down_apk_url">"http://125.62.26.52/fans/apk/phone/"</string>
     <string name="fans_data_url">http://125.62.26.52/fans/vod_service_version.json</string>

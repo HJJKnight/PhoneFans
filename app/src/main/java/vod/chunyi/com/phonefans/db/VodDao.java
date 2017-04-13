@@ -2,27 +2,23 @@ package vod.chunyi.com.phonefans.db;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Handler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import vod.chunyi.com.phonefans.PhoneFansApplication;
-import vod.chunyi.com.phonefans.bean.Competion;
-import vod.chunyi.com.phonefans.bean.CompetionDetail;
+import vod.chunyi.com.phonefans.bean.CompetionInfo;
+import vod.chunyi.com.phonefans.bean.CompetionDetailInfo;
 import vod.chunyi.com.phonefans.bean.Recommend;
 import vod.chunyi.com.phonefans.bean.Singer;
 import vod.chunyi.com.phonefans.bean.Song;
 import vod.chunyi.com.phonefans.bean.SongListDetail;
 import vod.chunyi.com.phonefans.bean.SongType;
 import vod.chunyi.com.phonefans.bean.User;
-import vod.chunyi.com.phonefans.net.MyAsyncTask;
-
 
 /**
- * 操作数据库的方法以及和后台交互的方法
- *
- * @author Administrator
+ * 数据库业务操作类
+ * Created by knight on 2017/4/11.
  */
 
 public class VodDao {
@@ -79,15 +75,15 @@ public class VodDao {
      */
     public String machineCode = "";
 
-    private MyAsyncTask asyncTask;
+
     /**
      * 塞況列表集合
      */
-    public List<Competion> competions = new ArrayList<Competion>();
+    public List<CompetionInfo> competions = new ArrayList<CompetionInfo>();
     /**
      * 比赛地区详情
      */
-    public List<CompetionDetail> competionDetails = new ArrayList<CompetionDetail>();
+    public List<CompetionDetailInfo> competionDetails = new ArrayList<CompetionDetailInfo>();
     /**
      * 用于储存登陆用户的信息
      */
@@ -119,96 +115,9 @@ public class VodDao {
     private PhoneFansApplication application;
 
     public VodDao(PhoneFansApplication application) {
-        machineCode = application.getMachineCode();
+
         this.application = application;
 
-    }
-
-    /**
-     * 根据用户电话查询用户信息
-     *
-     * @param phoneNum
-     * @param handler
-     */
-    public void postQueryUserByNumber(String phoneNum, Handler handler) {
-        asyncTask = new MyAsyncTask();
-        asyncTask.setUIPost(VodStaticNum.POST_QUERY_USERBYNUM, handler, this);
-        asyncTask.execute(phoneNum);
-    }
-
-    /**
-     * 更改登陆密码
-     *
-     * @param passWord
-     * @param handler
-     */
-    public void postChangePassWd(String passWord, Handler handler) {
-        asyncTask = new MyAsyncTask();
-        asyncTask.setUIPost(VodStaticNum.POST_CHANGPASSWORD, handler, this);
-        asyncTask.execute(passWord);
-    }
-
-    /**
-     * 获取验证码
-     *
-     * @param phoneNo 电话号码
-     * @param handler
-     */
-    public void getSmsCode(String phoneNo, Handler handler) {
-        smsCode = "";
-        GetsmsCode = 0;
-        asyncTask = new MyAsyncTask();
-        asyncTask.setUIPost(VodStaticNum.POST_GETSMSCODE, handler, this);
-        asyncTask.execute(phoneNo);
-    }
-
-    public void register(String phoneNum, String passWord, Handler handler) {
-        asyncTask = new MyAsyncTask();
-        asyncTask.setUIPost(VodStaticNum.POST_REGISTER, handler, this);
-        asyncTask.execute(phoneNum, passWord);
-
-    }
-
-    /**
-     * 登录
-     *
-     * @param userName 用户名
-     * @param passWord 密码
-     * @param handler
-     */
-    public void logIn(String userName, String passWord, Handler handler) {
-        asyncTask = new MyAsyncTask();
-        asyncTask.setUIPost(VodStaticNum.POST_LOGIN, handler, this);
-        asyncTask.execute(userName, passWord);
-    }
-
-    /**
-     * 请求服务器参数详情
-     *
-     * @param page    页码数
-     * @param rows    每页显示的数量
-     * @param matchNo 赛区编号
-     * @param handler 传入的hander以便返回数据后更新ui
-     */
-    public void postCompetionListDetail(int page, int rows, int matchNo,
-                                        Handler handler) {
-        asyncTask = new MyAsyncTask();
-        asyncTask.setUIPost(VodStaticNum.POST_COMPETITION_LIST_DETAIL, handler,
-                this);
-        asyncTask.execute(page, rows, matchNo);
-    }
-
-    /**
-     * 请求服务器参赛列表
-     *
-     * @param page    页码数
-     * @param rows    每页显示的数量
-     * @param handler 传入的hander以便返回数据后更新ui
-     */
-    public void postCompetionList(int page, int rows, Handler handler) {
-        asyncTask = new MyAsyncTask();
-        asyncTask.setUIPost(VodStaticNum.POST_COMPETITION_LIST, handler, this);
-        asyncTask.execute(page, rows);
     }
 
     /**
@@ -274,11 +183,9 @@ public class VodDao {
      * @param recommend_id
      * @param page
      * @param rows
-     * @param handler
      * @return
      */
-    public List<Song> searchSongsByRecomendId(int recommend_id, int page,
-                                              int rows) {
+    public List<Song> searchSongsByRecomendId(int recommend_id, int page, int rows) {
 
         searchSongList = null;
         searchSongList = new ArrayList<Song>();
@@ -346,7 +253,7 @@ public class VodDao {
     /**
      * 功能：查询歌单页面数据
      *
-     * @param page页数
+     * @param page 页数
      * @return recommendList页面数据
      */
     public List<SongListDetail> getSongListDetail(int page, int rows) {
@@ -406,17 +313,14 @@ public class VodDao {
      * @param song_sheet_id
      * @param page
      * @param rows
-     * @param handler
      * @return
      */
-    public List<Song> searchSongsBySongListId(int song_sheet_id, int page,
-                                              int rows) {
+    public List<Song> searchSongsBySongListId(int song_sheet_id, int page, int rows) {
 
         searchSongList = null;
         searchSongList = new ArrayList<Song>();
-        String sql = null;
 
-        sql = "select song.* FROM info_song_sheet_list rs LEFT JOIN info_song song ON song.song_id =rs.song_id WHERE rs.song_sheet_id = "
+        String sql = "select song.* FROM info_song_sheet_list rs LEFT JOIN info_song song ON song.song_id =rs.song_id WHERE rs.song_sheet_id = "
                 + song_sheet_id + " LIMIT ?,?";
 
         Cursor cur = db.rawQuery(
@@ -493,11 +397,9 @@ public class VodDao {
      * @param song_py 拼音
      * @param page    查询页码数 指定从第一开始
      * @param rows    每页显示的数量
-     * @param handler 将查询语句放在子线程当中 加入hander以便于更新ui
      * @return 歌曲集合
      */
-    public List<Song> searchSongsBySongTypeIdAndSongpy(int type_id,
-                                                       String song_py, int page, int rows) {
+    public List<Song> searchSongsBySongTypeIdAndSongpy(int type_id, String song_py, int page, int rows) {
 
         searchSongList = null;
         searchSongList = new ArrayList<Song>();
@@ -915,11 +817,11 @@ public class VodDao {
     /**
      * 根据歌手类型查询歌手总数
      *
-     * @param type 歌手类型 类型编号 01 华语男 02 华语女 03日韩男 04 日韩女 05 欧美男 06 欧美女 07 其他歌手
+     * @param type_code 歌手类型 类型编号 01 华语男 02 华语女 03日韩男 04 日韩女 05 欧美男 06 欧美女 07 其他歌手
      *             如果没有传入null或者空
      * @return
      */
-    public int querysingerConutBySingerType(String type_code) {
+    public int querySingerConutByTypeCode(String type_code) {
         int count = 0;
         String sql;
 
@@ -943,7 +845,7 @@ public class VodDao {
      * @param singer_py
      * @return
      */
-    public int querysingerConutBySingerpy(String singer_py) {
+    public int querySingerCountBySingerpy(String singer_py) {
         int count = 0;
         String sql;
 
@@ -1068,32 +970,11 @@ public class VodDao {
         return flag;
     }
 
-    /**
-     * 功能：将歌曲加入已选列表
-     *
-     * @param searchResult 歌曲对象
-     */
-    public void postAddSongToSelectList(Song song, Handler handler) {
-
-        SocketMessage message = new SocketMessage();
-        if (application.socketService != null && song != null) {
-            List<Song> Songs = new ArrayList<Song>();
-
-            message.setMethod("addSong");
-            message.setMsg(song.getSong_id() + "");
-            Songs.add(song);
-            message.setSongs(Songs);
-            application.socketService.sendTvMessage(message, handler);
-
-        }
-
-    }
-
-    public SQLiteDatabase getDb() {
+    public SQLiteDatabase getDB() {
         return db;
     }
 
-    public void setDb(SQLiteDatabase db) {
+    public void setDB(SQLiteDatabase db) {
         this.db = db;
     }
 
@@ -1104,7 +985,7 @@ public class VodDao {
      * @param rows 每页显示的数量
      * @return
      */
-    public List<Song> getSelectSongsByPR(int page, int rows) {
+    public List<Song> getSelectedSongByPR(int page, int rows) {
         songListPR = null;
         songListPR = new ArrayList<Song>();
         if (selectSongs != null && selectSongs.size() > (page - 1) * rows) {
@@ -1139,19 +1020,19 @@ public class VodDao {
         this.loadTime = loadTime;
     }
 
-    public List<Competion> getCompetions() {
+    public List<CompetionInfo> getCompetions() {
         return competions;
     }
 
-    public void setCompetions(List<Competion> competions) {
+    public void setCompetions(List<CompetionInfo> competions) {
         this.competions = competions;
     }
 
-    public List<CompetionDetail> getCompetionDetails() {
+    public List<CompetionDetailInfo> getCompetionDetails() {
         return competionDetails;
     }
 
-    public void setCompetionDetails(List<CompetionDetail> competionDetails) {
+    public void setCompetionDetails(List<CompetionDetailInfo> competionDetails) {
         this.competionDetails = competionDetails;
     }
 

@@ -1,5 +1,7 @@
 package vod.chunyi.com.phonefans.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -52,16 +54,15 @@ public class HomeActivity extends BaseActivity {
         mTiltes = this.getResources().getStringArray(R.array.home_top_title);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
+    public static void startActivity(Context context) {
+        Intent intent = new Intent(context, HomeActivity.class);
+        context.startActivity(intent);
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(System.currentTimeMillis() - oldOutTime > 1200l){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (System.currentTimeMillis() - oldOutTime > 1200l) {
                 oldOutTime = System.currentTimeMillis();
                 Toast.makeText(HomeActivity.this, "再次点击退出应用", Toast.LENGTH_SHORT).show();
                 return true;

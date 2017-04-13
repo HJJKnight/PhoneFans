@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import vod.chunyi.com.phonefans.ui.fragment.GameFragment;
+import vod.chunyi.com.phonefans.ui.fragment.CompetionFragment;
 import vod.chunyi.com.phonefans.ui.fragment.MyPageFragment;
 import vod.chunyi.com.phonefans.ui.fragment.SelectSongFragment;
 
@@ -30,7 +30,7 @@ public class ContainerViewAdaper extends FragmentPagerAdapter {
             case 0:
                 return new SelectSongFragment();
             case 1:
-                return new GameFragment();
+                return new CompetionFragment();
             case 2:
                 return new MyPageFragment();
         }

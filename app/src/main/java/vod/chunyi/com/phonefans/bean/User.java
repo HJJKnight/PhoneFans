@@ -1,152 +1,185 @@
 package vod.chunyi.com.phonefans.bean;
 
+import java.io.Serializable;
+
 /**
- * ���ڴ����û���Ϣ
- * 
+ * 用户实体类
  */
-public class User {
+public class User implements Serializable {
 
-	/**
-	 * �û�id
-	 */
-	private Integer userId;
+    //用户注册状态
+    private int resultCode;
+    //用户注册详情
+    private UserPo userPo;
 
-	/**
-	 * �û�����
-	 */
-	private String userName;
+    public static class UserPo {
+        private int page;
 
-	/**
-	 * �û���¼�ֻ��绰
-	 */
-	private String phoneNo;
+        private int rows;
 
-	/**
-	 * �û���¼����
-	 */
-	private String loginPsw;
+        private String sort;
 
-	/**
-	 * �û�ע��ʱ��
-	 */
-	private String createTime;
+        private String order;
 
-	/**
-	 * �û�ͷ��
-	 */
-	private String headImagUrl;
+        //用户id
+        private int userId;
+        //用户名称
+        private String userName;
+        //用户手机号码
+        private String phoneNo;
+        //用户密码
+        private String loginPsw;
+        //用户注册时间
+        private String createTime;
+        //用户头像
+        private String headImagUrl;
+        //用户性别
+        private String sex;
+        //用户年龄
+        private String age;
+        //用户区域
+        private String area;
+        //用户最后登陆时间
+        private String lastLoginTime;
 
-	/**
-	 * �û��Ա�
-	 */
-	private String sex;
+        private String isUsed;
 
-	/**
-	 * �û�����
-	 */
-	private Integer age;
+        public void setPage(int page) {
+            this.page = page;
+        }
 
-	/**
-	 * �û�����
-	 */
-	private String area;
+        public int getPage() {
+            return this.page;
+        }
 
-	/**
-	 * �û�����¼ʱ��
-	 */
-	private String lastLoginTime;
+        public void setRows(int rows) {
+            this.rows = rows;
+        }
 
-	/**
-	 * �û���Ч��
-	 */
-	private String isUsed;
+        public int getRows() {
+            return this.rows;
+        }
 
-	public Integer getUserId() {
-		return userId;
-	}
+        public void setSort(String sort) {
+            this.sort = sort;
+        }
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+        public String getSort() {
+            return this.sort;
+        }
 
-	public String getUserName() {
-		return userName;
-	}
+        public void setOrder(String order) {
+            this.order = order;
+        }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+        public String getOrder() {
+            return this.order;
+        }
 
-	public String getPhoneNo() {
-		return phoneNo;
-	}
+        public void setUserId(int userId) {
+            this.userId = userId;
+        }
 
-	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
-	}
+        public int getUserId() {
+            return this.userId;
+        }
 
-	public String getLoginPsw() {
-		return loginPsw;
-	}
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
 
-	public void setLoginPsw(String loginPsw) {
-		this.loginPsw = loginPsw;
-	}
+        public String getUserName() {
+            return this.userName;
+        }
 
-	public String getCreateTime() {
-		return createTime;
-	}
+        public void setPhoneNo(String phoneNo) {
+            this.phoneNo = phoneNo;
+        }
 
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
+        public String getPhoneNo() {
+            return this.phoneNo;
+        }
 
-	public String getHeadImagUrl() {
-		return headImagUrl;
-	}
+        public void setLoginPsw(String loginPsw) {
+            this.loginPsw = loginPsw;
+        }
 
-	public void setHeadImagUrl(String headImagUrl) {
-		this.headImagUrl = headImagUrl;
-	}
+        public String getLoginPsw() {
+            return this.loginPsw;
+        }
 
-	public String getSex() {
-		return sex;
-	}
+        public void setCreateTime(String createTime) {
+            this.createTime = createTime;
+        }
 
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+        public String getCreateTime() {
+            return this.createTime;
+        }
 
-	public Integer getAge() {
-		return age;
-	}
+        public void setHeadImagUrl(String headImagUrl) {
+            this.headImagUrl = headImagUrl;
+        }
 
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+        public String getHeadImagUrl() {
+            return this.headImagUrl;
+        }
 
-	public String getArea() {
-		return area;
-	}
+        public void setSex(String sex) {
+            this.sex = sex;
+        }
 
-	public void setArea(String area) {
-		this.area = area;
-	}
+        public String getSex() {
+            return this.sex;
+        }
 
-	public String getLastLoginTime() {
-		return lastLoginTime;
-	}
+        public void setAge(String age) {
+            this.age = age;
+        }
 
-	public void setLastLoginTime(String lastLoginTime) {
-		this.lastLoginTime = lastLoginTime;
-	}
+        public String getAge() {
+            return this.age;
+        }
 
-	public String getIsUsed() {
-		return isUsed;
-	}
+        public void setArea(String area) {
+            this.area = area;
+        }
 
-	public void setIsUsed(String isUsed) {
-		this.isUsed = isUsed;
-	}
+        public String getArea() {
+            return this.area;
+        }
+
+        public void setLastLoginTime(String lastLoginTime) {
+            this.lastLoginTime = lastLoginTime;
+        }
+
+        public String getLastLoginTime() {
+            return this.lastLoginTime;
+        }
+
+        public void setIsUsed(String isUsed) {
+            this.isUsed = isUsed;
+        }
+
+        public String getIsUsed() {
+            return this.isUsed;
+        }
+
+    }
+
+    public void setResultCode(int resultCode) {
+        this.resultCode = resultCode;
+    }
+
+    public int getResultCode() {
+        return this.resultCode;
+    }
+
+    public void setUserPo(UserPo userPo) {
+        this.userPo = userPo;
+    }
+
+    public UserPo getUserPo() {
+        return this.userPo;
+    }
 
 }

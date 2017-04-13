@@ -22,6 +22,8 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract int getLayoutId();
 
+    public abstract void initData();
+
     public abstract void initViews(View view);
 
     protected BaseActivity getHolderActivity() {
@@ -44,6 +46,7 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutId(), container, false);
         ButterKnife.bind(this,view);
+        initData();
         initViews(view);
         return view;
     }

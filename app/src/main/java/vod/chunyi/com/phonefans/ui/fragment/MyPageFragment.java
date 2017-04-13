@@ -17,6 +17,11 @@ public class MyPageFragment extends BaseFragment {
     }
 
     @Override
+    public void initData() {
+
+    }
+
+    @Override
     public void initViews(View view) {
 
     }
