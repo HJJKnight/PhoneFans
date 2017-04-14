@@ -1,5 +1,7 @@
 package vod.chunyi.com.phonefans.ui.activity;
 
+import android.content.Intent;
+
 import vod.chunyi.com.phonefans.ui.activity.base.BaseActivity;
 
 /**
@@ -19,7 +21,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
-    public void initVaribles() {
+    public void initVaribles(Intent intent) {
 
     }
 }

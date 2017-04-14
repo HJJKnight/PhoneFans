@@ -2,14 +2,12 @@ package vod.chunyi.com.phonefans.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import vod.chunyi.com.phonefans.R;
 import vod.chunyi.com.phonefans.adapter.ContainerViewAdaper;
 import vod.chunyi.com.phonefans.ui.activity.base.BaseActivity;
@@ -49,7 +47,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     @Override
-    public void initVaribles() {
+    public void initVaribles(Intent intent) {
 
         mTiltes = this.getResources().getStringArray(R.array.home_top_title);
     }

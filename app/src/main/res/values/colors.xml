@@ -6,7 +6,7 @@
 
 
     <color name="textNotFocused">#FFFFFF</color>
-    <color name="textFocused">#69B9E1</color>
+
     <color name="divider_color">#00dddddd</color>
     <color name="common_white">#00ffffff</color>
     <color name="textChecked">#BC4AB4</color>

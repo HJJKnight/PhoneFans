@@ -54,6 +54,9 @@ public class Constants {
     //手机网络数据连接类型
     public static final int NETWORN_MOBILE = 0X17;
 
+    /*. Activity 跳转参数常量*/
+    public static final String MATCH_NUM = "matchNo";
 
+    public static final String MATCH_IMG_PATH = "match_img_path";
 
 }

@@ -1,5 +1,6 @@
 package vod.chunyi.com.phonefans.ui.fragment;
 
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -33,6 +34,7 @@ public class SelectSongFragment extends BaseFragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getHolderActivity());
 
         mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getHolderActivity(),DividerItemDecoration.HORIZONTAL));
         mRecyclerView.setAdapter(new SelectSongAdapter(getHolderActivity()));
     }
 

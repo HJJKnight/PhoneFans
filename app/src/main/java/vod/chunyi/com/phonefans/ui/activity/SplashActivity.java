@@ -1,5 +1,6 @@
 package vod.chunyi.com.phonefans.ui.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 
@@ -33,7 +34,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     @Override
-    public void initVaribles() {
+    public void initVaribles(Intent intent) {
 
         // 从 assets 文件夹中复制 db 文件到本地文件夹
         copyDB(getResources().getString(R.string.db_name));

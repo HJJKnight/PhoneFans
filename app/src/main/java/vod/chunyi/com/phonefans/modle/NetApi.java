@@ -1,123 +1,91 @@
 package vod.chunyi.com.phonefans.modle;
 
-import android.content.Context;
-import android.os.Handler;
+import java.util.HashMap;
+import java.util.Map;
+
+import vod.chunyi.com.phonefans.bean.Song;
+import vod.chunyi.com.phonefans.net.BaseCallback;
 
 /**
- * 网络业务类
- * Created by knight on 2017/4/11.
+ * Created by knight on 2017/4/14.
  */
 
-public class NetApi {
+public interface NetApi {
 
-    private static NetApi mInstance;
 
-    private static NetTask mTask;
+    Map<String, Object> params = new HashMap<>();
 
-    private Context mContext;
-
-    public static NetApi getInstance(Context context) {
-        if (mInstance == null) {
-            return new NetApi(context);
-        }
-        return mInstance;
-    }
-
-    private NetApi(Context context) {
-        mContext = context;
-        //mTask = new NetTask(mContext);
-    }
 
     /**
      * 根据用户电话查询用户信息
      *
      * @param phoneNum
-     * @param handler
+     * @param callback
      */
-    public void postQueryUserByNumber(String phoneNum, Handler handler) {
-
-        mTask.setUIPost(NetCode.POST_QUERY_USERBYNUM, handler);
-        mTask.execute(phoneNum);
-    }
+    void postQueryUserByNumber(String phoneNum, BaseCallback callback);
 
     /**
      * 更改登陆密码
      *
+     * @param userId
      * @param passWord
-     * @param handler
+     * @param callback
      */
-    public void postChangePassword(String passWord, Handler handler) {
-
-        mTask.setUIPost(NetCode.POST_CHANGPASSWORD, handler);
-        mTask.execute(passWord);
-    }
+    void postChangePassword(int userId, String passWord, BaseCallback callback);
 
     /**
      * 获取验证码
      *
-     * @param phoneNo 电话号码
-     * @param handler
+     * @param phoneNo  电话号码
+     * @param callback
      */
-    public void getSmsCode(String phoneNo, Handler handler) {
-       /* smsCode = "";
-        GetsmsCode = 0;*/
-
-        mTask.setUIPost(NetCode.POST_GETSMSCODE, handler);
-        mTask.execute(phoneNo);
-    }
+    void getSmsCode(String phoneNo, BaseCallback callback);
 
     /**
      * 用户注册
+     * resultCode:判断注册是否成功 0失败 ,1成功 ,2已经注册
      *
      * @param phoneNum
      * @param passWord
-     * @param handler
+     * @param callback
      */
-    public void register(String phoneNum, String passWord, Handler handler) {
-
-        mTask.setUIPost(NetCode.POST_REGISTER, handler);
-        mTask.execute(phoneNum, passWord);
-
-    }
+    void postRegister(String phoneNum, String passWord, BaseCallback callback);
 
     /**
      * 登录
      *
      * @param userName 用户名
      * @param passWord 密码
-     * @param handler
+     * @param callback
      */
-    public void login(String userName, String passWord, Handler handler) {
-
-        mTask.setUIPost(NetCode.POST_LOGIN, handler);
-        mTask.execute(userName, passWord);
-    }
+    void postLogin(String userName, String passWord, BaseCallback callback);
 
     /**
      * 请求服务器参数详情
      *
-     * @param page    页码数
-     * @param rows    每页显示的数量
-     * @param matchNo 赛区编号
-     * @param handler 传入的hander以便返回数据后更新ui
+     * @param page     页码数
+     * @param rows     每页显示的数量
+     * @param matchNo  赛区编号
+     * @param callback 传入的callback以便返回数据后更新ui
      */
-    public void postCompetionDetailList(int page, int rows, int matchNo, Handler handler) {
-        mTask.setUIPost(NetCode.POST_COMPETITION_LIST_DETAIL, handler);
-        mTask.execute(page, rows, matchNo);
-    }
+    void postCompetionDetailList(int page, int rows, int matchNo, BaseCallback callback);
 
     /**
      * 请求服务器参赛列表
      *
-     * @param page    页码数
-     * @param rows    每页显示的数量
-     * @param handler 传入的hander以便返回数据后更新ui
+     * @param page     页码数
+     * @param rows     每页显示的数量
+     * @param callback 传入的hander以便返回数据后更新ui
      */
-    public void postCompetionList(int page, int rows, Handler handler) {
-        mTask = new NetTask(mContext);
-        mTask.setUIPost(NetCode.POST_COMPETITION_LIST, handler);
-        mTask.execute(page, rows);
-    }
+    void postCompetionList(int page, int rows, BaseCallback callback);
+
+    /**
+     * 功能：将歌曲加入已选列表
+     *
+     * @param song
+     * @param callback
+     */
+    void postAddSongToSelectList(Song song, BaseCallback callback);
 
 
     /**

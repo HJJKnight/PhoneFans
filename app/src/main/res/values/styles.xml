@@ -26,4 +26,8 @@
         <item name="tabSelectedTextColor">@color/seek_bar_pj</item>
     </style>
 
+    <style name="TitleTextAppearance">
+        <item name="android:textSize">@dimen/text_size_xxl</item>
+        <item name="android:textColor">@color/status_text</item>
+    </style>
 </resources>

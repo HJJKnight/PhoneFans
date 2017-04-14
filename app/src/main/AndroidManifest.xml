@@ -35,7 +35,11 @@
         </activity>
         <activity android:name=".ui.activity.HomeActivity"></activity>
 
+        <activity android:name=".ui.activity.CompetionDetailActivity"></activity>
+
         <service android:name=".service.DBOperationService"></service>
+
+
     </application>
 
 </manifest>

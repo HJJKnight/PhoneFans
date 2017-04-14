@@ -7,17 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vod.chunyi.com.phonefans.R;
+import vod.chunyi.com.phonefans.bean.CompetionDetailInfo;
 import vod.chunyi.com.phonefans.bean.CompetionInfo;
 import vod.chunyi.com.phonefans.ui.activity.CompetionDetailActivity;
 import vod.chunyi.com.phonefans.ui.activity.base.BaseActivity;
@@ -28,49 +26,45 @@ import vod.chunyi.com.phonefans.utils.ToastUtil;
  * Created by knight on 2017/4/13.
  */
 
-public class CompetionAdapter extends RecyclerView.Adapter<CompetionAdapter.CompetionViewHolder> {
+public class CompetionDetailAdapter extends RecyclerView.Adapter<CompetionDetailAdapter.CompetionDetailViewHolder> {
 
     private Context mContext;
 
-    private List<CompetionInfo> mData;
+    private List<CompetionDetailInfo> mData;
 
     private LayoutInflater mInflater;
 
-    public CompetionAdapter(BaseActivity context, List<CompetionInfo> data) {
+    public CompetionDetailAdapter(BaseActivity context, List<CompetionDetailInfo> data) {
         this.mContext = context;
         mData = data;
         mInflater = LayoutInflater.from(mContext);
     }
 
     @Override
-    public CompetionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CompetionDetailViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View itemView = mInflater.inflate(R.layout.item_competion, parent, false);
+        View itemView = mInflater.inflate(R.layout.item_competion_detail, parent, false);
 
-        return new CompetionViewHolder(itemView);
+        return new CompetionDetailViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(CompetionViewHolder holder, final int position) {
+    public void onBindViewHolder(CompetionDetailViewHolder holder, final int position) {
         if (!mData.isEmpty() && mData.size() > 0) {
             Glide.with(mContext)
-                    .load(mData.get(position).getCoverPicPath())
+                    .load(mData.get(position).getCoverImgPath())
                     .error(R.mipmap.icon_load_fail)
                     .crossFade()
                     .into(holder.ivCovery);
-            holder.tvName.setText(mData.get(position).getMatchName());
+            holder.tvUserName.setText(mData.get(position).getUserName());
 
-            // 如果活动正在进行 让正在进行的textview显示
-            if ("1".equals(mData.get(position).getIsUsed())) {
-                holder.tvStatus.setVisibility(View.VISIBLE);
-            }
+            holder.tvSongName.setText(mData.get(position).getSongName());
+
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showShort(mContext, "position:" + position + ",name:" + mData.get(position).getMatchName());
-
-                CompetionDetailActivity.startActivity(mContext, mData.get(position).getMatchNo(), mData.get(position).getCoverPicPath());
+                ToastUtil.showShort(mContext, "position:" + position + ",name:" + mData.get(position).getUserName());
 
             }
         });
@@ -81,16 +75,16 @@ public class CompetionAdapter extends RecyclerView.Adapter<CompetionAdapter.Comp
         return mData == null ? 0 : mData.size();
     }
 
-    static class CompetionViewHolder extends RecyclerView.ViewHolder {
+    static class CompetionDetailViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.iv_competion_Item)
+        @BindView(R.id.iv_competion_detail_covery)
         ImageView ivCovery;
-        @BindView(R.id.tv_competion_name)
-        TextView tvName;
-        @BindView(R.id.tv_competion_state)
-        TextView tvStatus;
+        @BindView(R.id.tv_competion_detail_user)
+        TextView tvUserName;
+        @BindView(R.id.tv_competion_detail_song)
+        TextView tvSongName;
 
-        public CompetionViewHolder(View itemView) {
+        public CompetionDetailViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 

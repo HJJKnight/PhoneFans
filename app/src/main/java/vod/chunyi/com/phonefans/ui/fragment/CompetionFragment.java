@@ -1,19 +1,30 @@
 package vod.chunyi.com.phonefans.ui.fragment;
 
-import android.os.Handler;
-import android.os.Message;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.List;
 
 import butterknife.BindView;
+import okhttp3.Request;
+import okhttp3.Response;
 import vod.chunyi.com.phonefans.R;
 import vod.chunyi.com.phonefans.adapter.CompetionAdapter;
 import vod.chunyi.com.phonefans.bean.CompetionInfo;
 import vod.chunyi.com.phonefans.modle.NetApi;
+import vod.chunyi.com.phonefans.modle.NetApiIml;
+import vod.chunyi.com.phonefans.modle.NetCode;
+import vod.chunyi.com.phonefans.net.SimpleCallback;
 import vod.chunyi.com.phonefans.ui.fragment.base.BaseFragment;
 
 /**
@@ -31,14 +42,6 @@ public class CompetionFragment extends BaseFragment {
 
     private List<CompetionInfo> data;
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            data = (List<CompetionInfo>) msg.obj;
-            //Log.e("CompetionFragment","data:"+data.toString());
-        }
-    };
-
     @Override
     public int getLayoutId() {
         return R.layout.fragment_competion;
@@ -46,16 +49,48 @@ public class CompetionFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        NetApi.getInstance(getActivity()).postCompetionList(page, ROWS, handler);
+        NetApi api = NetApiIml.getInstance(getHolderActivity());
+
+        //请求服务器参数信息列表
+        api.postCompetionList(page, ROWS, new SimpleCallback<String>() {
+            @Override
+            public void onFailure(Request request, Exception e) {
+
+            }
+
+            @Override
+            public void onSuccess(Response response, String s) {
+                try {
+                    Gson gson = new Gson();
+                    Type listType = new TypeToken<List<CompetionInfo>>() {
+                    }.getType();
+                    JSONObject jsonObj = new JSONObject(s);
+
+                    data = gson.fromJson(jsonObj.get(NetCode.ROWS).toString(), listType);
+
+                    Log.e("CompetionList-->list", data.toString());
+
+                    initRecyclerView(data);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
     }
 
     @Override
     public void initViews(View view) {
+
+    }
+
+    private void initRecyclerView(List<CompetionInfo> data) {
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getHolderActivity());
 
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(new CompetionAdapter(getHolderActivity()));
-
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getHolderActivity(), DividerItemDecoration.HORIZONTAL));
+        mRecyclerView.setAdapter(new CompetionAdapter(getHolderActivity(), data));
 
     }
 }
