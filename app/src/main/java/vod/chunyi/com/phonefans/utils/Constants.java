@@ -59,4 +59,6 @@ public class Constants {
 
     public static final String MATCH_IMG_PATH = "match_img_path";
 
+    public static final String MATCH_NAME = "match_name";
+
 }

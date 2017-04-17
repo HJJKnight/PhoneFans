@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/item_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,13 +13,12 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/iv_competion_detail_covery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/item_img_w"
+                android:layout_height="@dimen/item_img_h"
                 android:background="@mipmap/singer"
                 android:scaleType="fitXY"/>
 
@@ -44,7 +44,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
-                android:drawableLeft="@mipmap/icon_peple"
+                android:drawableLeft="@mipmap/icon_people"
                 android:textColor="@color/text_gray_light"
                 android:textSize="@dimen/text_size_s"
                 tools:text="测试"/>

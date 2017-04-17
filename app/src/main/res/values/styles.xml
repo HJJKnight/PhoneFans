@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/seek_bar_pj</item>
+        <item name="colorPrimaryDark">@color/seek_bar_pj</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -29,5 +29,36 @@
     <style name="TitleTextAppearance">
         <item name="android:textSize">@dimen/text_size_xxl</item>
         <item name="android:textColor">@color/status_text</item>
+    </style>
+
+    <style name="MyItemTextAppearance">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:clickable">false</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:textSize">@dimen/text_size_xl</item>
+    </style>
+
+    <style name="MyItemImg">
+        <item name="android:layout_width">@dimen/my_item_img_w</item>
+        <item name="android:layout_height">@dimen/my_item_img_h</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:clickable">false</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="SettingItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/my_item_h</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="UploadImgPopwindow">
+        <item name="android:windowEnterAnimation">@anim/pop_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_out</item>
     </style>
 </resources>

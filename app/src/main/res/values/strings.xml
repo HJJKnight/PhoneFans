@@ -12,7 +12,6 @@
     <!--<string name="app_name">歌迷系统</string>-->
     <string name="title_activity_login">LoginActivity</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_select_song">SelectSongActivity</string>
     <string name="title_activity_song">SongActivity</string>
     <string name="title_activity_set">SetActivity</string>
@@ -34,4 +33,6 @@
     <string name="title_activity_base">BaseActivity</string>
 
     <string name="img_failure">图片加载失败</string>
+
+    <string name="bind_desc">已绑定的专用点歌设备</string>
 </resources>

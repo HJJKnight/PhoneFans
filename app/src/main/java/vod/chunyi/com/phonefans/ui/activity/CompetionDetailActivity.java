@@ -5,13 +5,12 @@ import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -58,6 +57,8 @@ public class CompetionDetailActivity extends BaseActivity {
     private int mMatchNum;
     //封面图片地址
     private String mImgPath;
+    //比赛名称
+    private String mMatchName;
 
     private int page = 1;
 
@@ -73,9 +74,17 @@ public class CompetionDetailActivity extends BaseActivity {
 
         StatusBarUtils.setImage(this);
 
+        mToolbarLayout.setTitle(mMatchName);
         mToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.result_text));
         mToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.result_text));
         Glide.with(this).load(mImgPath).error(R.mipmap.icon_load_fail).into(mIvCompetionCovery);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
@@ -83,6 +92,7 @@ public class CompetionDetailActivity extends BaseActivity {
         if (intent != null) {
             mMatchNum = intent.getIntExtra(Constants.MATCH_NUM, -1);
             mImgPath = intent.getStringExtra(Constants.MATCH_IMG_PATH);
+            mMatchName = intent.getStringExtra(Constants.MATCH_NAME);
         }
 
         NetApi api = NetApiIml.getInstance(this);
@@ -113,10 +123,11 @@ public class CompetionDetailActivity extends BaseActivity {
 
     }
 
-    public static void startActivity(Context context, int matchNo, String imgPath) {
+    public static void startActivity(Context context, int matchNo, String imgPath, String matchName) {
         Intent intent = new Intent(context, CompetionDetailActivity.class);
         intent.putExtra(Constants.MATCH_NUM, matchNo);
         intent.putExtra(Constants.MATCH_IMG_PATH, imgPath);
+        intent.putExtra(Constants.MATCH_NAME, matchName);
         context.startActivity(intent);
     }
 
@@ -124,7 +135,7 @@ public class CompetionDetailActivity extends BaseActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(CompetionDetailActivity.this, DividerItemDecoration.HORIZONTAL));
         mRecyclerView.setAdapter(new CompetionDetailAdapter(this, data));
     }
 }

@@ -68,9 +68,12 @@ public class CompetionAdapter extends RecyclerView.Adapter<CompetionAdapter.Comp
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showShort(mContext, "position:" + position + ",name:" + mData.get(position).getMatchName());
+                //ToastUtil.showShort(mContext, "position:" + position + ",name:" + mData.get(position).getMatchName());
 
-                CompetionDetailActivity.startActivity(mContext, mData.get(position).getMatchNo(), mData.get(position).getCoverPicPath());
+                CompetionDetailActivity.startActivity(mContext,
+                        mData.get(position).getMatchNo(),
+                        mData.get(position).getCoverPicPath(),
+                        mData.get(position).getMatchName());
 
             }
         });

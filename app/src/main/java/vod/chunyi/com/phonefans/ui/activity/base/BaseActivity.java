@@ -36,10 +36,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private void initToolBar() {
-        if(this instanceof HomeActivity){
+        //if(this instanceof HomeActivity){
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-        }
+        //}
     }
 
 }

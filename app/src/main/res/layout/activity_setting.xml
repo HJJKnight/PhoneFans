@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/setting_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/seek_bar_pj"
+        android:fitsSystemWindows="true"
+        app:navigationIcon="@mipmap/icon_arrow_back"
+        app:title="设置"
+        app:titleTextColor="@color/result_text"/>
+
+    <!-- 设置部分 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#EEEEEE"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/setting_head"
+            style="@style/SettingItem"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    style="@style/MyItemTextAppearance"
+                    android:layout_weight="1"
+                    android:text="头像"/>
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/my_pic"/>
+            </LinearLayout>
+
+            <ImageView
+                style="@style/MyItemImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/my_detail"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/setting_nick_name"
+            style="@style/SettingItem"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                style="@style/MyItemTextAppearance"
+                android:layout_weight="1"
+                android:text="昵称"/>
+
+            <ImageView
+                style="@style/MyItemImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/my_detail"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/setting_tel"
+            style="@style/SettingItem"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                style="@style/MyItemTextAppearance"
+                android:layout_weight="1"
+                android:text="手机号"/>
+
+            <ImageView
+                style="@style/MyItemImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/my_detail"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/setting_change_psw"
+            style="@style/SettingItem"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                style="@style/MyItemTextAppearance"
+                android:layout_weight="1"
+                android:text="修改密码"/>
+
+            <ImageView
+                style="@style/MyItemImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/my_detail"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/setting_quit"
+            style="@style/SettingItem"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    style="@style/MyItemTextAppearance"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/view_rectangle"
+                    android:text="退出登录"
+                    android:textColor="@color/seek_bar_pj"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <vod.chunyi.com.phonefans.view.HomeBottomController
+        android:id="@+id/home_bottom_controller"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+</LinearLayout>

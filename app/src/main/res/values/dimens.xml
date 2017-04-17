@@ -6,7 +6,21 @@
     <dimen name="text_size_s">12sp</dimen>
     <dimen name="text_size_m">14sp</dimen>
     <dimen name="text_size_l">16sp</dimen>
+    <dimen name="text_size_xl">18sp</dimen>
     <dimen name="text_size_xxl">20sp</dimen>
 
     <dimen name="app_bar_height">256dp</dimen>
+
+    <dimen name="item_img_w">140dp</dimen>
+    <dimen name="item_img_h">140dp</dimen>
+    <dimen name="item_margin">4dp</dimen>
+    <dimen name="competion_item_h">180dp</dimen>
+
+    <dimen name="my_head_h">160dp</dimen>
+    <dimen name="my_item_h">40dp</dimen>
+    <dimen name="my_item_img_h">26dp</dimen>
+    <dimen name="my_item_img_w">26dp</dimen>
+
+    <dimen name="icon_head_h">70dp</dimen>
+    <dimen name="icon_head_w">70dp</dimen>
 </resources>

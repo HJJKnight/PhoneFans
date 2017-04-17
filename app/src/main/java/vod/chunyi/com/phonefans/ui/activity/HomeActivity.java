@@ -20,7 +20,6 @@ import vod.chunyi.com.phonefans.view.HomeBottomController;
 
 public class HomeActivity extends BaseActivity {
 
-
     @BindView(R.id.tab_title)
     TabLayout mTabTitle;
     @BindView(R.id.fragment_container)

@@ -89,7 +89,7 @@ public class CompetionFragment extends BaseFragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getHolderActivity());
 
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getHolderActivity(), DividerItemDecoration.HORIZONTAL));
+        //mRecyclerView.addItemDecoration(new DividerItemDecoration(getHolderActivity(), DividerItemDecoration.HORIZONTAL));
         mRecyclerView.setAdapter(new CompetionAdapter(getHolderActivity(), data));
 
     }
