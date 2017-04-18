@@ -6,6 +6,19 @@ package vod.chunyi.com.phonefans.utils;
  */
 
 public class Constants {
+
+    public static final String USER_INFO = "user_info";
+
+    public static final String USER_ID = "userId";
+
+    public static final String USER_IMG = "fileImage";
+    public static final String USER_NAME = "userName";
+    public static final String USER_PHONE = "phoneNo";
+    public static final String USER_PSW = "loginPsw";
+
+
+
+
     /* 底部菜单栏相关常量*/
     //控制栏底部"点赞"
     public static final int BOTTOM_CONTROLLER_SUPPORT = 0X01;
@@ -60,5 +73,6 @@ public class Constants {
     public static final String MATCH_IMG_PATH = "match_img_path";
 
     public static final String MATCH_NAME = "match_name";
+
 
 }

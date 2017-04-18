@@ -12,7 +12,10 @@ import java.util.List;
 import java.util.UUID;
 
 import vod.chunyi.com.phonefans.bean.Song;
+import vod.chunyi.com.phonefans.bean.User;
 import vod.chunyi.com.phonefans.db.VodDao;
+import vod.chunyi.com.phonefans.utils.Constants;
+import vod.chunyi.com.phonefans.utils.SharedPreferencesUtils;
 
 /**
  * Created by knight on 2017/4/6.
@@ -20,22 +23,16 @@ import vod.chunyi.com.phonefans.db.VodDao;
 
 public class PhoneFansApplication extends Application {
 
-    /**
-     * 关联的dao
-     */
+    private String TAG = "PhoneFansApplication";
+    //关联的dao
     private VodDao dao;
 
-    /**
-     * 数据库对象
-     */
+    //数据库对象
     private SQLiteDatabase db;
 
+    private User mUser;
 
-    private String TAG = "PhoneFansApplication";
-
-    /**
-     * 用于存储全局的已选歌曲
-     */
+    //用于存储全局的已选歌曲
     public List<Song> selectSongs = new ArrayList<Song>();
     /**
      * 用于记录底部点击的位置
@@ -83,6 +80,7 @@ public class PhoneFansApplication extends Application {
         super.onCreate();
         mInstance = this;
 
+        mUser = SharedPreferencesUtils.getObject(this, Constants.USER_INFO, User.class);
         // 2 将数据库取出 注入到dao里面 这里先注入 是防止进入后进行查询
         /*db = this.openOrCreateDatabase(path, MODE_PRIVATE, null);
         dao = new VodDao(this);
@@ -115,6 +113,19 @@ public class PhoneFansApplication extends Application {
         this.dao = dao;
     }
 
+    public User getUser() {
+        return mUser;
+    }
 
+    public void putUser(User user) {
+        try {
+            SharedPreferencesUtils.putObj(this, Constants.USER_INFO, user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void jumpToTargetActivity(Context context){
+
+    }
 }

@@ -1,14 +1,11 @@
 package vod.chunyi.com.phonefans.ui.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vod.chunyi.com.phonefans.R;
 import vod.chunyi.com.phonefans.ui.activity.SettingActivity;
@@ -22,6 +19,8 @@ public class MyPageFragment extends BaseFragment {
 
     @BindView(R.id.my_head_img)
     ImageView mHeadImg;
+    @BindView(R.id.my_login_status)
+    TextView mStatus;
     @BindView(R.id.my_qr_scan)
     LinearLayout mQrScan;
     @BindView(R.id.my_setting)
@@ -42,17 +41,26 @@ public class MyPageFragment extends BaseFragment {
 
     }
 
-
-    @OnClick({R.id.my_head_img, R.id.my_qr_scan, R.id.my_setting})
+    @OnClick({R.id.my_head_img, R.id.my_login_status, R.id.my_qr_scan, R.id.my_setting})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.my_head_img:
+                doLogin();
+                break;
+            case R.id.my_login_status:
+                doLogin();
                 break;
             case R.id.my_qr_scan:
+
                 break;
             case R.id.my_setting:
                 SettingActivity.startActivity(getHolderActivity());
                 break;
         }
+    }
+
+    private void doLogin() {
+        // TODO: 2017/4/18 检查当前用户登录信息
+
     }
 }

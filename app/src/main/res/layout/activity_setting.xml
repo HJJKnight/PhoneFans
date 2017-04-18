@@ -42,12 +42,13 @@
                     android:layout_weight="1"
                     android:text="头像"/>
 
-                <ImageView
+                <vod.chunyi.com.phonefans.view.CircleImageView
+                    android:id="@+id/setting_img_head"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_centerVertical="true"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/my_pic"/>
+                    android:src="@mipmap/singer"/>
             </LinearLayout>
 
             <ImageView

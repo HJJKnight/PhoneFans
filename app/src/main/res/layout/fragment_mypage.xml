@@ -31,7 +31,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="17dp"
                 android:gravity="center"
-                android:text="未登陆"
+                android:text="点击登陆"
                 android:textColor="#ff7b56"
                 android:textSize="@dimen/text_size_xl"/>
         </RelativeLayout>
