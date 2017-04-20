@@ -7,6 +7,10 @@ package vod.chunyi.com.phonefans.modle;
 
 public class NetCode {
 
+    public static final int SUCCESS_CODE = 1;
+    public static final int FAILE_CODE = 0;
+
+
     public static final int POST_LOGIN = 0X101;// 登陆
     public static final int NO_CONNECT_SERVER = 0X102;// 没有连接到服务器
     public static final int POST_REGISTER = 0X103;// 注册
@@ -26,7 +30,7 @@ public class NetCode {
     public static final int PASUE_FAILE = 0X117;
     public static final int SCOKET_QUERY_SELECT_SONG = 0X118;
 
-    public static final String USER_INFO = "user";
+    public static final String USER_INFO = "userBean";
 
     //网络业务接口
     public static final String VOD_FINDUSER_BY_PHONE = "vod_findUserByPhone.json";
@@ -35,7 +39,9 @@ public class NetCode {
     public static final String VOD_LOGIN = "vod_login.json";
     public static final String VOD_MATCHVIDEO_LIST = "vod_matchVideo_list.json";
     public static final String VOD_MATCH_LIST = "vod_match_list.json";
-    public static final String VOD_GET_SMS_CODE  = "vod_getSmsCode.json";
+    public static final String VOD_GET_SMS_CODE = "vod_getSmsCode.json";
+    public static final String VOD_UPLOAD_HEAD_IMG = "vod_upload_headImage.json";
+
 
     //网路业务参数
     public static final String PHONE_NUMBER = "phoneNo";
@@ -46,5 +52,11 @@ public class NetCode {
     public static final String PAGE = "page";
     public static final String ROWS = "rows";
     public static final String MATCH_NO = "matchNo";
+
+
+    public static final String USER_IMG = "fileImage";
+    public static final String USER_NAME = "userName";
+    public static final String USER_PHONE = "phoneNo";
+    public static final String USER_PSW = "loginPsw";
 
 }

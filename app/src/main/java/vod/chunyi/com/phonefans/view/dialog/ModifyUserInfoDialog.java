@@ -1,13 +1,13 @@
 package vod.chunyi.com.phonefans.view.dialog;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import butterknife.BindView;
 import vod.chunyi.com.phonefans.R;
 
 /**
@@ -15,6 +15,8 @@ import vod.chunyi.com.phonefans.R;
  */
 
 public class ModifyUserInfoDialog extends BaseDialog implements View.OnClickListener {
+
+    private String mTag;
 
     private TextView mTvTitle;
     private EditText mEtInput;
@@ -61,6 +63,28 @@ public class ModifyUserInfoDialog extends BaseDialog implements View.OnClickList
     public ModifyUserInfoDialog setTitle(String title) {
         mTvTitle.setText(title);
         return this;
+    }
+
+    public String getInputText() {
+        return mEtInput.getText().toString();
+    }
+
+    public ModifyUserInfoDialog setInputText(String str) {
+        mEtInput.setText(str);
+        mEtInput.setSelection(str.length());
+        return this;
+    }
+
+
+    public void setTag(String tag) {
+        this.mTag = tag;
+    }
+
+    public String getTag() {
+        if (!TextUtils.isEmpty(mTag)) {
+            return mTag;
+        }
+        return null;
     }
 
     public ModifyUserInfoDialog setOnButtonClickListener(OnButtonClickListener listener) {

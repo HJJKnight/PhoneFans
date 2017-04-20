@@ -1,18 +1,21 @@
 package vod.chunyi.com.phonefans.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
  * 用户实体类
  */
-public class User implements Serializable {
+public class UserBean implements Serializable {
 
     //用户注册状态
+    @SerializedName("result")
     private int resultCode;
     //用户注册详情
-    private UserPo userPo;
+    private User userInfo;
 
-    public static class UserPo {
+    public static class User {
         private int page;
 
         private int rows;
@@ -174,12 +177,12 @@ public class User implements Serializable {
         return this.resultCode;
     }
 
-    public void setUserPo(UserPo userPo) {
-        this.userPo = userPo;
+    public void setUser(User userInfo) {
+        this.userInfo = userInfo;
     }
 
-    public UserPo getUserPo() {
-        return this.userPo;
+    public User getUser() {
+        return this.userInfo;
     }
 
 }

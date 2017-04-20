@@ -2,25 +2,19 @@ package vod.chunyi.com.phonefans.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -29,15 +23,17 @@ import okhttp3.Request;
 import okhttp3.Response;
 import vod.chunyi.com.phonefans.PhoneFansApplication;
 import vod.chunyi.com.phonefans.R;
-import vod.chunyi.com.phonefans.bean.User;
-import vod.chunyi.com.phonefans.net.OkHttpHelper;
+import vod.chunyi.com.phonefans.bean.UserBean;
+import vod.chunyi.com.phonefans.modle.NetApi;
+import vod.chunyi.com.phonefans.modle.NetApiIml;
 import vod.chunyi.com.phonefans.net.SimpleCallback;
 import vod.chunyi.com.phonefans.ui.activity.base.BaseActivity;
 import vod.chunyi.com.phonefans.utils.Constants;
 import vod.chunyi.com.phonefans.utils.PicUtils;
+import vod.chunyi.com.phonefans.utils.SharedPreferencesUtils;
+import vod.chunyi.com.phonefans.utils.StatusBarUtils;
 import vod.chunyi.com.phonefans.utils.ToastUtil;
 import vod.chunyi.com.phonefans.view.HomeBottomController;
-import vod.chunyi.com.phonefans.view.UploadImgPopupWindow;
 import vod.chunyi.com.phonefans.view.dialog.ModifyUserInfoDialog;
 
 /**
@@ -46,8 +42,8 @@ import vod.chunyi.com.phonefans.view.dialog.ModifyUserInfoDialog;
 
 public class SettingActivity extends BaseActivity {
 
-    private static final int PHOTO_REQUEST_GALLERY = 1;
-    private static final int PHOTO_REQUEST_CAREMA = 2;
+    private static final String SETTING_NICK_NAME = "setting_nick_name";
+    private static final String SETTING_PHONE = "setting_phone";
 
     @BindView(R.id.setting_layout)
     LinearLayout mSettingLayout;
@@ -59,8 +55,12 @@ public class SettingActivity extends BaseActivity {
     ImageView mImgHead;
     @BindView(R.id.setting_nick_name)
     LinearLayout mNickName;
+    @BindView(R.id.setting_text_nick_name)
+    TextView mTvNickName;
     @BindView(R.id.setting_tel)
-    LinearLayout mTel;
+    LinearLayout mPhone;
+    @BindView(R.id.setting_text_phone)
+    TextView mTvPhone;
     @BindView(R.id.setting_change_psw)
     LinearLayout mChangePsw;
     @BindView(R.id.setting_quit)
@@ -68,10 +68,9 @@ public class SettingActivity extends BaseActivity {
     @BindView(R.id.home_bottom_controller)
     HomeBottomController homeBottomController;
 
-    private User mUser;
-    private String mUploadUrl;
-    //是否是上传图片
-    private boolean isUploadImg;
+    private UserBean mUserBean;
+
+    private NetApi api;
 
     private ModifyUserInfoDialog mDialog;
 
@@ -82,6 +81,8 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     public void initViews() {
+
+        StatusBarUtils.setColor(this, getResources().getColor(R.color.seek_bar_pj));
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,13 +100,27 @@ public class SettingActivity extends BaseActivity {
                                 mDialog.dismiss();
                                 break;
                             case R.id.view_modify_user_info_confirm:
-                                if (mUser != null) {
+                                // TODO: 2017/4/19 需要对当前的userInfo 进行验证
+                                //if (mUserBean != null) {
+                                ToastUtil.showShort(SettingActivity.this, mDialog.getInputText());
 
+                                if (SETTING_NICK_NAME.equals(mDialog.getTag())) {
+                                    mTvNickName.setText(mDialog.getInputText());
+                                } else {
+                                    mTvPhone.setText(mDialog.getInputText());
                                 }
+                                //}
+                                upLoadUserInfo();
+                                mDialog.dismiss();
                                 break;
                         }
                     }
                 });
+
+        if (mUserBean != null) {
+            mTvNickName.setText(mUserBean.getUser().getUserName());
+            mTvPhone.setText(mUserBean.getUser().getPhoneNo());
+        }
     }
 
     @Override
@@ -113,7 +128,9 @@ public class SettingActivity extends BaseActivity {
         //mUploadUrl = getResources().getString(R.string.upload_headImage_url);
         // TODO: 2017/4/17 获取 当前登录用户的相关信息
         PhoneFansApplication application = PhoneFansApplication.getInstance();
-        mUser = application.getUser();
+        mUserBean = application.getUser();
+        api = NetApiIml.getInstance(SettingActivity.this);
+
     }
 
     public static void startActivity(Context context) {
@@ -126,21 +143,6 @@ public class SettingActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.setting_head:
-               /* UploadImgPopupWindow popwindow = new UploadImgPopupWindow(this, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        switch (view.getId()) {
-                            case R.id.pop_btn_take_photo:
-                                TakePhoto();
-                                break;
-                            case R.id.pop_btn_pick_photo:
-                                PickPhoto();
-                                break;
-                        }
-                    }
-                });
-                popwindow.showAtLocation(mSettingLayout, Gravity.BOTTOM, 0, 0);*/
-                isUploadImg = true;
 
                 PhotoPicker.builder()
                         .setPhotoCount(1)
@@ -152,16 +154,25 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.setting_nick_name:
                 //TODO 弹出自定义 popupwindow
-                mDialog.setTitle("修改用户昵称").show();
+                mDialog.setTag(SETTING_NICK_NAME);
+                mDialog.setTitle("修改用户昵称").setInputText("haha").show();
 
                 break;
             case R.id.setting_tel:
                 // TODO: 2017/4/17  弹出自定义 popupwindow
+                mDialog.setTag(SETTING_PHONE);
+                mDialog.setTitle("修改手机号码").setInputText("12345678998").show();
                 break;
             case R.id.setting_change_psw:
-
+                //mUserBean.getUserPo().getUserId()
+                ModifyPswActivity.startActivity(SettingActivity.this, 11);
                 break;
             case R.id.setting_quit:
+                //mUserBean.getUserPo().getPhoneNo()
+                SharedPreferencesUtils.put(SettingActivity.this, Constants.USER_PHONE, "17702345967");
+                // TODO: 2017/4/19 等把用户信息保存好后，放开这个操作
+                //SharedPreferencesUtils.remove(SettingActivity.this, Constants.USER_INFO);
+                LoginActivity.startActivity(SettingActivity.this);
                 break;
         }
     }
@@ -181,70 +192,28 @@ public class SettingActivity extends BaseActivity {
                 Log.e("settingActivity", "photo:" + photos.get(0));
                 // TODO: 2017/4/18 图片上传至服务器
                 Log.e("base64", PicUtils.ImageToBase64Str(photos.get(0)));
-
-                PicUtils.Base64ToImage(PicUtils.ImageToBase64Str(photos.get(0)), Environment.getExternalStorageDirectory().getPath());
+                UploadHeadImg(PicUtils.ImageToBase64Str(photos.get(0)));
+                //PicUtils.Base64ToImage(PicUtils.ImageToBase64Str(photos.get(0)), Environment.getExternalStorageDirectory().getPath());
             }
         }
     }
 
     /**
-     * 调用系统拍照
-     */
-    private void TakePhoto() {
-        // 调用系统相机
-        Uri imageUri = null;
-        Intent openCameraIntent = new Intent(
-                MediaStore.ACTION_IMAGE_CAPTURE);
-
-        imageUri = Uri.fromFile(new File(getApplicationContext().getExternalFilesDir(null), "headImage.jpg"));
-
-        // 指定照片保存路径（SD卡），image.jpg为一个临时文件，每次拍照后这个图片都会被替换
-        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        startActivityForResult(openCameraIntent, PHOTO_REQUEST_CAREMA);
-    }
-
-    /**
-     * 图片选择
-     */
-    private void PickPhoto() {
-        // 调用本地相册选取照片
-        Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        photoPickerIntent.setType("image/*");
-        photoPickerIntent.putExtra("crop", true);
-        photoPickerIntent.putExtra("scale", true);
-        startActivityForResult(photoPickerIntent, PHOTO_REQUEST_GALLERY);
-    }
-
-    /**
-     * 上传操作
+     * 上传用户头像操作
      *
-     * @param info
+     * @param base64Str
      */
-    private void UploadHeadImg(String info) {
+    private void UploadHeadImg(String base64Str) {
 
-        Map<String, Object> params = new HashMap<>();
-
-        if (mUser == null) {
+        if (mUserBean == null) {
             LoginActivity.startActivity(SettingActivity.this);
             ToastUtil.showShort(this, "请先登录");
         }
-        params.put(Constants.USER_ID, mUser.getUserPo().getUserId());
-        if (isUploadImg) {
-            mUploadUrl = getResources().getString(R.string.upload_headImage_url);
-            params.put(Constants.USER_IMG, info);
-            isUploadImg = !isUploadImg;
-        } else {
-            mUploadUrl = getResources().getString(R.string.upload_vod_modifyUser);
 
-            /*params.put(Constants.USER_NAME, userName);
-            params.put(Constants.USER_PHONE, userPhone);
-            params.put(Constants.USER_PSW, userPsw);*/
-        }
-
-        OkHttpHelper.getInstance().post(mUploadUrl, params, new SimpleCallback<String>() {
+        api.postUserHeadImg(mUserBean.getUser().getUserId(), base64Str, new SimpleCallback<String>() {
             @Override
             public void onFailure(Request request, Exception e) {
-                ToastUtil.showShort(SettingActivity.this, "用户信息修改失败");
+                ToastUtil.showShort(SettingActivity.this, "用户头像修改失败");
             }
 
             @Override
@@ -255,7 +224,7 @@ public class SettingActivity extends BaseActivity {
                         if (jobj.has("resultCode")) {
                             int resultCode = jobj.getInt("resultCode");
                             if (resultCode == 0) {
-                                ToastUtil.showShort(SettingActivity.this, "用户信息修改失败");
+                                ToastUtil.showShort(SettingActivity.this, "用户头像修改失败");
                             } else if (resultCode == 1) {
 
                             }
@@ -264,7 +233,30 @@ public class SettingActivity extends BaseActivity {
                         e.printStackTrace();
                     }
                 }
+            }
+        });
+    }
 
+    /**
+     * 上传用户信息
+     */
+    private void upLoadUserInfo() {
+        if (mUserBean == null) {
+            LoginActivity.startActivity(SettingActivity.this);
+            ToastUtil.showShort(this, "请先登录");
+        }
+
+        api.postUserInfo(mUserBean, new SimpleCallback<UserBean>() {
+            @Override
+            public void onFailure(Request request, Exception e) {
+
+            }
+
+            @Override
+            public void onSuccess(Response response, UserBean userBean) {
+                if (response.isSuccessful()) {
+                    ToastUtil.showShort(SettingActivity.this, "用户信息更新成功");
+                }
             }
         });
     }

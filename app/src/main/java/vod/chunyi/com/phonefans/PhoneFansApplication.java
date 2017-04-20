@@ -3,16 +3,12 @@ package vod.chunyi.com.phonefans;
 import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.telephony.TelephonyManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import vod.chunyi.com.phonefans.bean.Song;
-import vod.chunyi.com.phonefans.bean.User;
+import vod.chunyi.com.phonefans.bean.UserBean;
 import vod.chunyi.com.phonefans.db.VodDao;
 import vod.chunyi.com.phonefans.utils.Constants;
 import vod.chunyi.com.phonefans.utils.SharedPreferencesUtils;
@@ -30,7 +26,7 @@ public class PhoneFansApplication extends Application {
     //数据库对象
     private SQLiteDatabase db;
 
-    private User mUser;
+    private UserBean mUserBean;
 
     //用于存储全局的已选歌曲
     public List<Song> selectSongs = new ArrayList<Song>();
@@ -80,7 +76,7 @@ public class PhoneFansApplication extends Application {
         super.onCreate();
         mInstance = this;
 
-        mUser = SharedPreferencesUtils.getObject(this, Constants.USER_INFO, User.class);
+        mUserBean = SharedPreferencesUtils.getObject(this, Constants.USER_INFO, UserBean.class);
         // 2 将数据库取出 注入到dao里面 这里先注入 是防止进入后进行查询
         /*db = this.openOrCreateDatabase(path, MODE_PRIVATE, null);
         dao = new VodDao(this);
@@ -113,13 +109,13 @@ public class PhoneFansApplication extends Application {
         this.dao = dao;
     }
 
-    public User getUser() {
-        return mUser;
+    public UserBean getUser() {
+        return mUserBean;
     }
 
-    public void putUser(User user) {
+    public void putUser(UserBean userBean) {
         try {
-            SharedPreferencesUtils.putObj(this, Constants.USER_INFO, user);
+            SharedPreferencesUtils.putObj(this, Constants.USER_INFO, userBean);
         } catch (Exception e) {
             e.printStackTrace();
         }

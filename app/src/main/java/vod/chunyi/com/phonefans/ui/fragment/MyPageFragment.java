@@ -7,7 +7,10 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import vod.chunyi.com.phonefans.PhoneFansApplication;
 import vod.chunyi.com.phonefans.R;
+import vod.chunyi.com.phonefans.bean.UserBean;
+import vod.chunyi.com.phonefans.ui.activity.LoginActivity;
 import vod.chunyi.com.phonefans.ui.activity.SettingActivity;
 import vod.chunyi.com.phonefans.ui.fragment.base.BaseFragment;
 
@@ -21,10 +24,14 @@ public class MyPageFragment extends BaseFragment {
     ImageView mHeadImg;
     @BindView(R.id.my_login_status)
     TextView mStatus;
+    @BindView(R.id.my_head_layout)
+    LinearLayout mHeadLayout;
     @BindView(R.id.my_qr_scan)
     LinearLayout mQrScan;
     @BindView(R.id.my_setting)
     LinearLayout mSetting;
+
+    private UserBean mUserBean;
 
     @Override
     public int getLayoutId() {
@@ -34,6 +41,8 @@ public class MyPageFragment extends BaseFragment {
     @Override
     public void initData() {
         //TODO 获取已登录用户信息
+        PhoneFansApplication application = PhoneFansApplication.getInstance();
+        mUserBean = application.getUser();
     }
 
     @Override
@@ -41,13 +50,10 @@ public class MyPageFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.my_head_img, R.id.my_login_status, R.id.my_qr_scan, R.id.my_setting})
+    @OnClick({R.id.my_head_layout, R.id.my_qr_scan, R.id.my_setting})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.my_head_img:
-                doLogin();
-                break;
-            case R.id.my_login_status:
+            case R.id.my_head_layout:
                 doLogin();
                 break;
             case R.id.my_qr_scan:
@@ -61,6 +67,10 @@ public class MyPageFragment extends BaseFragment {
 
     private void doLogin() {
         // TODO: 2017/4/18 检查当前用户登录信息
+        if (mUserBean == null) {
+            LoginActivity.startActivity(getHolderActivity());
+        }
+
 
     }
 }

@@ -18,7 +18,7 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_find_pwd">FindPwdActivity</string>
     <string name="title_activity_change_pwd">ChangePwdActivity</string>
-    <string name="placeHolder">placeHolder</string>
+
     <string name="seekbar_add">+</string>
     <string name="seekbar_minus">-</string>
     <string name="create">生成</string>
@@ -35,4 +35,13 @@
     <string name="img_failure">图片加载失败</string>
 
     <string name="bind_desc">已绑定的专用点歌设备</string>
+
+    <string name="psw_desc">输入新密码</string>
+    <string name="psw_confirm_desc">确认新密码</string>
+    <string name="psw_empty_desc">密码不能为空</string>
+    <string name="psw_illegal_desc">密码不能包含特殊字符</string>
+    <string name="psw_illegal_length_desc">密码6-12位</string>
+
+
+
 </resources>

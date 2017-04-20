@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import vod.chunyi.com.phonefans.bean.Song;
+import vod.chunyi.com.phonefans.bean.UserBean;
 import vod.chunyi.com.phonefans.net.BaseCallback;
 
 /**
@@ -61,7 +62,24 @@ public interface NetApi {
     void postLogin(String userName, String passWord, BaseCallback callback);
 
     /**
-     * 请求服务器参数详情
+     * 更新用户信息
+     *
+     * @param userBean
+     * @param callback
+     */
+    void postUserInfo(UserBean userBean, BaseCallback callback);
+
+    /**
+     * 更新用户头像
+     *
+     * @param userId
+     * @param base64Str
+     * @param callback
+     */
+    void postUserHeadImg(int userId, String base64Str, BaseCallback callback);
+
+    /**
+     * 请求服务器参赛详情
      *
      * @param page     页码数
      * @param rows     每页显示的数量

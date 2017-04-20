@@ -56,7 +56,8 @@ public class StatusBarUtils {
             //5.0及以上，不设置透明状态栏，设置会有半透明阴影
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //是activity_main。xml中的图片可以沉浸到状态栏上
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            //activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //设置状态栏颜色透明。
             activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
         } else {
@@ -92,6 +93,7 @@ public class StatusBarUtils {
 
     /**
      * 利用反射获取到 statusBar 的高度
+     *
      * @param acitivity
      * @return
      */

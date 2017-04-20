@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <!-- 顶部红色部分 -->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/seek_bar_pj"
+        android:fitsSystemWindows="true"
+        app:navigationIcon="@mipmap/icon_arrow_back"
+        app:title="修改密码"
+        app:titleTextColor="@color/result_text"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/pwd"
+            android:scaleType="centerCrop"/>
+
+        <EditText
+            android:id="@+id/modify_psw_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:background="@color/transparent"
+            android:hint="@string/psw_desc"
+            android:inputType="textPassword"
+            android:textColor="@color/edit_text"
+            android:textColorHint="@color/edit_hint"
+            android:textSize="@dimen/text_size_l"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#9f999999"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/pwd"
+            android:scaleType="centerCrop"/>
+
+        <EditText
+            android:id="@+id/modify_psw_new_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:background="@color/transparent"
+            android:hint="@string/psw_confirm_desc"
+            android:inputType="textPassword"
+            android:textColor="@color/edit_text"
+            android:textColorHint="@color/edit_hint"
+            android:textSize="@dimen/text_size_l"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#9f999999"/>
+
+    <ImageView
+        android:id="@+id/modify_psw_iv_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="40dp"
+        android:background="@mipmap/changepwd"/>
+
+</LinearLayout>

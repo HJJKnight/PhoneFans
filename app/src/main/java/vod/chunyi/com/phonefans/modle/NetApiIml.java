@@ -1,27 +1,12 @@
 package vod.chunyi.com.phonefans.modle;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
-import java.util.List;
-
-import okhttp3.Request;
-import okhttp3.Response;
 import vod.chunyi.com.phonefans.R;
-import vod.chunyi.com.phonefans.bean.CompetionDetailInfo;
-import vod.chunyi.com.phonefans.bean.CompetionInfo;
 import vod.chunyi.com.phonefans.bean.Song;
-import vod.chunyi.com.phonefans.bean.User;
+import vod.chunyi.com.phonefans.bean.UserBean;
 import vod.chunyi.com.phonefans.net.BaseCallback;
 import vod.chunyi.com.phonefans.net.OkHttpHelper;
-import vod.chunyi.com.phonefans.net.SimpleCallback;
 
 /**
  * Created by knight on 2017/4/14.
@@ -61,7 +46,7 @@ public class NetApiIml implements NetApi {
 
         params.clear();
        /* int userId = -1;
-        User.UserPo userInfo = SharedPreferencesUtils.getObject(mContext, NetCode.USER_INFO, User.class).getUserPo();
+        UserBean.UserPo userInfo = SharedPreferencesUtils.getObject(mContext, NetCode.USER_INFO, UserBean.class).getUserPo();
         if (userInfo != null) {
             userId = userInfo.getUserId();
         }*/
@@ -107,6 +92,29 @@ public class NetApiIml implements NetApi {
         OkHttpHelper.getInstance().post(url, params, callback);
 
 
+    }
+
+
+    @Override
+    public void postUserInfo(UserBean userBean, BaseCallback callback) {
+        params.clear();
+        params.put(NetCode.USER_ID, userBean.getUser().getUserId());
+        params.put(NetCode.USER_NAME, userBean.getUser().getUserName());
+        params.put(NetCode.USER_PHONE, userBean.getUser().getPhoneNo());
+
+        String url = address + NetCode.VOD_MODIFY_USER;
+
+        OkHttpHelper.getInstance().post(url, params, callback);
+    }
+
+    @Override
+    public void postUserHeadImg(int userId, String base64Str, BaseCallback callback) {
+        params.clear();
+        params.put(NetCode.USER_ID, userId);
+        params.put(NetCode.USER_IMG, base64Str);
+        String url = address + NetCode.VOD_UPLOAD_HEAD_IMG;
+
+        OkHttpHelper.getInstance().post(url, params, callback);
     }
 
     @Override

@@ -33,11 +33,16 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.LoginActivity"></activity>
+
         <activity android:name=".ui.activity.HomeActivity"></activity>
 
         <activity android:name=".ui.activity.CompetionDetailActivity"></activity>
 
         <activity android:name=".ui.activity.SettingActivity"></activity>
+
+        <activity android:name=".ui.activity.ModifyPswActivity"></activity>
+
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"

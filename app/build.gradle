@@ -39,6 +39,9 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.google.code.gson:gson:2.8.0'
 
+    //图片选择框架
     compile 'me.iwf.photopicker:PhotoPicker:0.9.5@aar'
+    //加载等待Dialog
+    compile 'com.github.d-max:spots-dialog:0.7@aar'
 
 }

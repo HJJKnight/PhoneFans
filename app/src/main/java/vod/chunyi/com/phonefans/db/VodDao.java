@@ -14,7 +14,7 @@ import vod.chunyi.com.phonefans.bean.Singer;
 import vod.chunyi.com.phonefans.bean.Song;
 import vod.chunyi.com.phonefans.bean.SongListDetail;
 import vod.chunyi.com.phonefans.bean.SongType;
-import vod.chunyi.com.phonefans.bean.User;
+import vod.chunyi.com.phonefans.bean.UserBean;
 
 /**
  * 数据库业务操作类
@@ -87,7 +87,7 @@ public class VodDao {
     /**
      * 用于储存登陆用户的信息
      */
-    public User user;
+    public UserBean userBean;
     /**
      * 验证码
      */
@@ -103,7 +103,7 @@ public class VodDao {
     /**
      * 用于储存临时用户的信息 比如在找回密码时用户不一定登陆需要临时储存
      */
-    public User sofrtUser;
+    public UserBean sofrtUserBean;
     /**
      * 请求服务器修改密码是否成功 0 失败 1 成功
      */
