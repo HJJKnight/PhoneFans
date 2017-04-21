@@ -123,14 +123,14 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onSuccess(Response response, UserBean userBean) {
                 if (response.isSuccessful()) {
-                    Log.e("resultCode", userBean.getResultCode() + "");
+
                     if (userBean.getResultCode() == NetCode.SUCCESS_CODE) {
                         try {
                             SharedPreferencesUtils.putObj(LoginActivity.this, Constants.USER_INFO, userBean);
+                            HomeActivity.startActivity(LoginActivity.this);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        HomeActivity.startActivity(LoginActivity.this);
                     } else {
                         ToastUtil.showShort(LoginActivity.this, "账号或密码错误");
                     }

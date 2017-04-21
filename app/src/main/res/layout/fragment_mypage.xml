@@ -24,16 +24,18 @@
                 android:clickable="true"
                 android:orientation="vertical">
 
-                <ImageView
+                <vod.chunyi.com.phonefans.view.CircleImageView
                     android:id="@+id/my_head_img"
                     android:layout_width="@dimen/icon_head_w"
                     android:layout_height="@dimen/icon_head_h"
-                    android:background="@mipmap/my_nologin"/>
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/my_nologin"/>
 
                 <TextView
                     android:id="@+id/my_login_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
                     android:text="点击登陆"
                     android:textColor="#ff7b56"

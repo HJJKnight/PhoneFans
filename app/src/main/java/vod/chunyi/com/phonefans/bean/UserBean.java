@@ -13,9 +13,9 @@ public class UserBean implements Serializable {
     @SerializedName("result")
     private int resultCode;
     //用户注册详情
-    private User userInfo;
+    private User user;
 
-    public static class User {
+    public static class User implements Serializable{
         private int page;
 
         private int rows;
@@ -177,12 +177,12 @@ public class UserBean implements Serializable {
         return this.resultCode;
     }
 
-    public void setUser(User userInfo) {
-        this.userInfo = userInfo;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public User getUser() {
-        return this.userInfo;
+        return this.user;
     }
 
 }
